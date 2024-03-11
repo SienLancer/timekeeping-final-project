@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.example.finalproject.R;
+import com.example.finalproject.fragments.StaffHomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -28,10 +30,12 @@ public class SplashActivity extends AppCompatActivity {
     private void nextActivity() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null){
-
+            Intent i = new Intent(this, SignInForStaffActivity.class);
+            startActivity(i);
         }else {
-            Intent i = new Intent(this, MainActivity.class);
+            Intent i = new Intent(this, BottomTabActivity.class);
             startActivity(i);
         }
+        finish();
     }
 }

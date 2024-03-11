@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bgsignin"
     android:orientation="vertical"
-    tools:context=".SignInForStaffActivity">
+    tools:context=".activities.SignInForStaffActivity">
 
     <ImageButton
         android:id="@+id/backSignInS_imgBtn"
@@ -79,34 +79,6 @@
         android:text="Login"
         android:textColor="#FFFFFF"
         android:textSize="16sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/dont_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Don't have an account?"
-            android:textAlignment="textEnd"
-            android:textColor="@color/white"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/signUpS_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/orange"
-            android:textSize="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:text="Sign up" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
