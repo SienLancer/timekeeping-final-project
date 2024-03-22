@@ -23,9 +23,10 @@ public class CustomDialogFragment extends DialogFragment {
     EditText ip_shift_et;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    public CustomDialogFragment(Activity activity) {
-super();
-    }
+
+//    public CustomDialogFragment(Activity activity) {
+//super();
+//    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,11 +49,20 @@ super();
         add_shift_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-setDataItem();
+
             }
         });
 
+
+
         return view;
+    }
+    public Button getButton() {
+        return add_shift_btn;
+    }
+
+    public EditText getEditText() {
+        return ip_shift_et;
     }
 
     public void setDataItem(){

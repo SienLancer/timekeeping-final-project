@@ -1,9 +1,11 @@
 package com.example.finalproject.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +29,9 @@ import com.google.firebase.database.ValueEventListener;
 public class StaffCalendarFragment extends Fragment {
     private View mView;
     EditText ip_shift_et;
-    CustomDialogFragment dialogFragment = new CustomDialogFragment(getActivity());
+    Button add_shift_btn,cancel_btn;
+    Dialog dialog;
+    //CustomDialogFragment dialogFragment;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     ValueEventListener listener;
@@ -63,7 +67,21 @@ public class StaffCalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_staff_calendar, container, false);
         init();
+        //dialogFragment = (CustomDialogFragment) getChildFragmentManager().findFragmentByTag("custom_popup_dialog");
+//        CustomDialogFragment dialogFragment = (CustomDialogFragment) getTargetFragment();
+//
+//        ip_shift_et=dialogFragment.getEditText();
+//        add_shift_btn =dialogFragment.getButton();
 
+//        cancel_btn =dialogFragment.getView().findViewById(R.id.cancel_btn);
+        dialog=new Dialog(getActivity());
+        dialog.setContentView(R.layout.custom_popup_dialog);
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        ip_shift_et=dialog.findViewById(R.id.ip_shift_et);
+        add_shift_btn =dialog.findViewById(R.id.add_shift_btn);
+        cancel_btn =dialog.findViewById(R.id.cancel_btn);
         getDataTable();
         itemClick();
 
@@ -261,20 +279,39 @@ public class StaffCalendarFragment extends Fragment {
             public void onClick(View view) {
                 showDialog();
 
+                add_shift_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if (user != null) {
+                            String dataItem = ip_shift_et.getText().toString();
+                            firebaseDatabase.getReference().child("Calendar").child("week1").child("sun3").setValue(dataItem);
+                            Toast.makeText(getContext(), "Data item added successfully", Toast.LENGTH_SHORT).show();
+
+
+
+                        }else {
+                            Toast.makeText(getContext(), "User not logged in", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }
 
 
     public void showDialog(){
+        //CustomDialogFragment a = (CustomDialogFragment) getTargetFragment();
+//        dialogFragment = new CustomDialogFragment();
+//        Bundle args = new Bundle();
+//        args.putString("title", "Enter a name to select a shift");
+//        dialogFragment.setArguments(args);
+//        dialogFragment.show(getChildFragmentManager(), "dialog");
 
-        Bundle args = new Bundle();
-        args.putString("title", "Enter a name to select a shift");
-        dialogFragment.setArguments(args);
-        dialogFragment.show(getFragmentManager(), "dialog");
-         //ip_shift_et=dialogFragment.findViewById(R.id.ip_shift_et);
-//        Button add_shift_btn =dialogFragment.findViewById(R.id.add_shift_btn);
-//        Button cancel_btn =dialogFragment.findViewById(R.id.cancel_btn);
+
+        dialog.show();
+
+
     }
 
     public void init(){

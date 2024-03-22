@@ -137,7 +137,7 @@ public class StaffHomeFragment extends Fragment {
             String userId = user.getUid();
             String qrcode = dateString + userId;
             String encodedString = Base64.encodeToString(qrcode.getBytes(), Base64.DEFAULT);
-            firebaseDatabase.getReference().child("QRCode").child("codescan").setValue("encodedString");
+            firebaseDatabase.getReference().child("QRCode").child("codescan").setValue(encodedString);
         }else if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
             Toast.makeText(context, "Camera permission required", Toast.LENGTH_SHORT).show();
         }else {
